@@ -1,0 +1,3 @@
+#!/bin/bash
+# Get Public IP Address
+wget -q -O - ipinfo.io/ip
