@@ -1,0 +1,59 @@
+#!/bin/bash
+# List all Google Compute Engine instance resources
+
+# Display Help
+Help() {
+  echo
+  echo "List all Google Compute Engine instance resources"
+  echo
+  echo "usage: $0 [-h] \"[filter]\""
+  echo
+  echo "options:"
+  echo "  -h         Print this Help."
+  echo "  filter     Filter the list based on parameters, remember the double quote."
+  echo
+  echo "Filter examples:"
+  echo
+  echo "  List instances that have name my-instance:"
+  echo "    name=my-instance"
+  echo
+  echo "  List instances that have name contains instance:"
+  echo "    name ~ instance"
+  echo
+  echo "  List instances that have name start with my-:"
+  echo "    name ~ ^my-"
+  echo
+  echo "  List instances that have machineType f1-micro:"
+  echo "    machineType:f1-micro"
+  echo
+  echo "  List instances with zone prefix us AND NOT MachineType f1-micro:"
+  echo "    zone ~ ^us AND -machineType:f1-micro"
+  echo
+  echo "  List instances with tag my-tag OR my-other-tag:"
+  echo "    tags.items=(my-tag,my-other-tag)"
+  echo
+  echo "  List instances with tag my-tag AND my-other-tag:"
+  echo "    tags.items=my-tag AND tags.items=my-other-tag"
+  echo
+  echo "  List instances with label my-label with any value:"
+  echo "    labels.my-label=*"
+  echo
+}
+
+# Options
+while getopts ":h" option; do
+  case $option in
+  h)
+    Help
+    exit
+    ;;
+  \?)
+    echo "Error: Invalid option"
+    exit
+    ;;
+  esac
+done
+
+# Command
+FILTER=$1
+gcloud compute instances list --filter="$FILTER"
