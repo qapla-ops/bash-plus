@@ -1,3 +1,25 @@
 #!/bin/bash
-# Get Public IP Address
+Help() {
+  echo
+  echo "Networking: View public IP by making a request to a remote API"
+  echo
+  echo "usage: $0"
+  echo
+}
+
+# Options
+while getopts ":h" option; do
+  case $option in
+  h)
+    Help
+    exit
+    ;;
+  \?)
+    echo "Error: Invalid option"
+    exit
+    ;;
+  esac
+done
+
+# Command
 wget -q -O - ipinfo.io/ip

@@ -1,0 +1,43 @@
+#!/bin/bash
+Help() {
+  echo
+  echo "Google Cloud: Activate an existing configuration"
+  echo
+  echo "usage: $0 <config_name>"
+  echo
+  echo "config_name:"
+  echo "  The name of the existing configuration"
+  echo
+}
+
+# Options
+while getopts ":h" option; do
+  case $option in
+  h)
+    Help
+    exit
+    ;;
+  \?)
+    echo "Error: Invalid option"
+    exit
+    ;;
+  esac
+done
+
+# Check required arguments
+CONFIG_NAME=$1
+if [ -z $CONFIG_NAME ]; then
+  echo "Error: Configuration name is missing"
+  Help
+  exit
+fi;
+
+# Check if configuration name exists
+check_cmd="gcloud config configurations list --filter=\"name:$CONFIG_NAME\" --format=\"value(name)\""
+if [ ! $(eval $check_cmd) ]; then
+  echo "Error: Configuration doesn't exist"
+  exit
+fi
+
+# Command
+gcloud config configurations activate $CONFIG_NAME

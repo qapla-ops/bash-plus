@@ -8,5 +8,29 @@ Running the `install.sh` file will copy all the scripting files into the `/usr/l
 ```
 usage: install.sh [PREFIX]
 
-PREFIX: Used as a prefix in the command name, if omitted the default prefix bp will be used, e.g. bp-command
+PREFIX: 
+  Used as a prefix in the command name, if omitted the default prefix bp will be used, e.g. bp-command
 ```
+
+# Commands
+
+All commands start with the prefix, such as `bp-...` if no custom prefix is ​​specified.
+To view all available commands you can type the prefix name with the hyphen and press TAB (twice) to view the complete list.
+The documentation only shows the original command without the prefix.
+
+## Networking
+
+* `ip`
+  
+  View public IP by making a request to a remote API.
+
+## Google Cloud
+
+* `gccca`
+
+  Activate an exiting Google Cloud configuration
+
+* `gccil`
+
+  List all Google Compute Engine instance resources
+
